@@ -31,8 +31,8 @@ nav_order: 3
 (async ()=>{
   const root = document.getElementById('roadmap');
   const fallback = document.getElementById('fallback');
-  const dataUrl = "{{ '/data/roadmap.json' | relative_url }}"; // baseurl-safe
-
+  const dataUrl = "https://yoficlemy.github.io/Monedario/data/roadmap.json";
+  
   try {
     const res = await fetch(dataUrl, { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP '+res.status+' fetching '+dataUrl);
