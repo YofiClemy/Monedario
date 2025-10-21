@@ -1,7 +1,7 @@
 title: Monedario
 description: Calendar-first personal finance app for iPhone, iPad, and macOS.
 url: "https://yoficlemy.github.io"
-baseurl: "/Monedario"            # set to repo name; "" if using org/user root pages
+baseurl: "/Monedario"
 remote_theme: "just-the-docs/just-the-docs@v0.8.2"
 color_scheme: "light"
 
