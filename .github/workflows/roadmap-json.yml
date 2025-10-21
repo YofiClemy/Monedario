@@ -1,0 +1,77 @@
+name: Build Roadmap JSON
+on:
+  schedule: [{ cron: "0 */6 * * *" }]  # every 6h
+  workflow_dispatch: {}
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch Project items → roadmap.json
+        env:
+          GH_TOKEN: ${{ secrets.ROADMAP_PAT }}
+        run: |
+          mkdir -p data
+          cat > query.graphql <<'GQL'
+          query($login: String!, $number: Int!) {
+            user(login: $login) {
+              projectV2(number: $number) {
+                title
+                url
+                fields(first: 50) {
+                  nodes { ... on ProjectV2SingleSelectField { id name options { id name } } }
+                }
+                items(first: 200) {
+                  nodes {
+                    content {
+                      __typename
+                      ... on Issue { title url number repository { nameWithOwner } labels(first:10){nodes{name}} }
+                      ... on PullRequest { title url number repository { nameWithOwner } }
+                      ... on DraftIssue { title body }
+                    }
+                    fieldValues(first: 20) {
+                      nodes {
+                        ... on ProjectV2ItemFieldSingleSelectValue {
+                          field { ... on ProjectV2SingleSelectField { name } }
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          GQL
+
+          curl -s -H "Authorization: Bearer $GH_TOKEN" \
+               -H "Content-Type: application/json" \
+               -d '{"query": "'"$(tr -d '\n' < query.graphql)"'", "variables": {"login":"YofiClemy","number":1}}' \
+               https://api.github.com/graphql > api.json
+
+          node - <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('api.json','utf8'));
+          const proj = data.data.user.projectV2;
+          const statusFieldName = 'Status'; // adjust if your single-select field is named differently
+          const items = (proj.items.nodes || []).map(n => {
+            const c = n.content || {};
+            const status = (n.fieldValues.nodes||[])
+              .find(v => v.field && v.field.name === statusFieldName)?.name || 'Backlog';
+            const title = c.title || '(untitled)';
+            const url = c.url || null;
+            const repo = c.repository?.nameWithOwner || null;
+            const labels = c.labels?.nodes?.map(l=>l.name) || [];
+            return { title, url, repo, labels, status, type: c.__typename };
+          });
+          fs.writeFileSync('data/roadmap.json', JSON.stringify({ updatedAt: new Date().toISOString(), items }, null, 2));
+          NODE
+
+      - name: Commit & deploy JSON
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/roadmap.json
+          git commit -m "Update roadmap.json" || echo "No changes"
+          git push
