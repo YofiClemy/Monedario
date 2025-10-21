@@ -1,36 +1,76 @@
+---
+layout: default
+title: Roadmap
+nav_order: 3
+---
+
 <section id="roadmap"></section>
+<p id="fallback" hidden>
+  Can’t load the embedded roadmap. View it directly:
+  <a href="https://yoficlemy.github.io/monedario-site/data/roadmap.json" target="_blank" rel="noopener">JSON</a> ·
+  <a href="https://github.com/users/YofiClemy/projects/1" target="_blank" rel="noopener">GitHub Project</a>
+</p>
+
+<style>
+:root { --brand:#08413B; }
+.roadmap{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.col{border:1px solid #e5e7eb;border-radius:12px;padding:12px;background:#fff}
+.col h3{margin:0 0 8px 0;font-size:1rem;display:flex;align-items:center;gap:.5rem}
+.count{background:#eef2f7;border:1px solid #e5e7eb;border-radius:999px;padding:2px 8px;font-size:.75rem}
+.card{padding:10px;border:1px solid #e5e7eb;border-radius:10px;margin:8px 0;background:#fff}
+.card a{color:var(--brand);text-decoration:none}
+.status{font-size:.8rem;opacity:.7}
+@media (prefers-color-scheme: dark){
+  .col,.card{background:#0b0f14;border-color:#1f2937}
+  .count{background:#111827;border-color:#374151;color:#cbd5e1}
+  .card a{color:#22b3a6}
+}
+</style>
+
 <script>
 (async ()=>{
-  const res = await fetch('/data/roadmap.json'); // adjust path if needed
-  const { items } = await res.json();
-
-  const columns = ["Now","Next","In Progress","Done","Backlog"];
-  const byStatus = Object.fromEntries(columns.map(c=>[c,[]]));
-  for (const it of items) (byStatus[it.status] ??= []).push(it);
-
   const root = document.getElementById('roadmap');
-  root.innerHTML = `
-    <style>
-      .roadmap{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-      .col{border:1px solid #e5e7eb;border-radius:12px;padding:12px;background:#fff}
-      .col h3{margin:0 0 8px 0;font-size:1rem}
-      .card{padding:10px;border:1px solid #f0f2f4;border-radius:10px;margin:8px 0}
-      .card a{text-decoration:none}
-      .status{font-size:.8rem;opacity:.7}
-    </style>
-    <div class="roadmap">
-      ${columns.map(c=>`
-        <div class="col">
-          <h3>${c}</h3>
-          ${(byStatus[c]||[]).map(it=>`
-            <div class="card">
-              <div><a href="${it.url ?? '#'}" target="_blank" rel="noopener">${it.title}</a></div>
-              ${it.repo ? `<div class="status">${it.repo}</div>`:''}
-            </div>
-          `).join('')}
-        </div>
-      `).join('')}
-    </div>
-  `;
+  const fallback = document.getElementById('fallback');
+  const dataUrl = "{{ '/data/roadmap.json' | relative_url }}"; // baseurl-safe
+
+  try {
+    const res = await fetch(dataUrl, { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP '+res.status+' fetching '+dataUrl);
+    const { items = [], updatedAt } = await res.json();
+
+    // Map your statuses (“In progress”, “Planned - accepted”, “Under review”, “Done”)
+    const columns = [
+      { id:'now',  title:'Now / In Progress',  match:s=>/in\s*progress|now/i.test(s) },
+      { id:'plan', title:'Planned',            match:s=>/planned/i.test(s) },
+      { id:'rev',  title:'Under Review',       match:s=>/under\s*review|backlog/i.test(s) },
+      { id:'done', title:'Done',               match:s=>/done|completed|shipped/i.test(s) },
+    ];
+    const buckets = Object.fromEntries(columns.map(c=>[c.id,[]]));
+    for (const it of items) {
+      const s = (it.status || '').toLowerCase();
+      (buckets[(columns.find(c=>c.match(s)) || columns[1]).id]).push(it); // default to Planned
+    }
+
+    root.innerHTML = `
+      <p class="status">Updated ${new Date(updatedAt).toLocaleString()}</p>
+      <div class="roadmap">
+        ${columns.map(c => `
+          <div class="col">
+            <h3>${c.title} <span class="count">${buckets[c.id].length}</span></h3>
+            ${buckets[c.id].map(it => `
+              <div class="card">
+                <div><a href="${it.url ?? '#'}" target="_blank" rel="noopener">${it.title}</a></div>
+                ${it.repo ? `<div class="status">${it.repo}</div>` : ''}
+                ${it.labels?.length ? `<div style="margin-top:4px">${it.labels.map(l=>`<span class="count">${l}</span>`).join(' ')}</div>` : ''}
+              </div>
+            `).join('') || '<div class="status">No items yet.</div>'}
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } catch (err) {
+    console.error(err);
+    fallback.hidden = false;
+  }
 })();
 </script>
