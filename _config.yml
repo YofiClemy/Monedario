@@ -1,0 +1,31 @@
+title: Monedario
+description: Calendar-first personal finance app for iPhone, iPad, and macOS.
+url: "https://yoficlemy.github.io"
+baseurl: "/Monedario"            # set to repo name; "" if using org/user root pages
+theme: just-the-docs
+color_scheme: light
+
+just_the_docs:
+  logo: "/assets/monedario-logo.png"
+  favicon_ico: "/assets/favicon.ico"
+  nav_external_links:
+    - title: TestFlight iOS
+      url: https://testflight.apple.com/join/
+    - title: TestFlight macOS (Coming soon)
+      url: https://testflight.apple.com/
+
+# Navigation
+nav_order: 1
+aux_links:
+  "Feature requests & votes":
+    - "https://insigh.to/b/monedario"
+  "GitHub":
+    - "https://github.com/YofiClemy"
+
+# Build
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Internationalization
+languages: ["en", "es", "fr"]
