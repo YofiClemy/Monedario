@@ -1,4 +1,4 @@
-- name: Fetch Project items → roadmap.json
+- name: Fetch Project items
   env:
     GH_TOKEN: ${{ secrets.ROADMAP_PAT }}
     LOGIN: YofiClemy
