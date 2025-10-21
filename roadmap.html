@@ -1,0 +1,36 @@
+<section id="roadmap"></section>
+<script>
+(async ()=>{
+  const res = await fetch('/data/roadmap.json'); // adjust path if needed
+  const { items } = await res.json();
+
+  const columns = ["Now","Next","In Progress","Done","Backlog"];
+  const byStatus = Object.fromEntries(columns.map(c=>[c,[]]));
+  for (const it of items) (byStatus[it.status] ??= []).push(it);
+
+  const root = document.getElementById('roadmap');
+  root.innerHTML = `
+    <style>
+      .roadmap{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+      .col{border:1px solid #e5e7eb;border-radius:12px;padding:12px;background:#fff}
+      .col h3{margin:0 0 8px 0;font-size:1rem}
+      .card{padding:10px;border:1px solid #f0f2f4;border-radius:10px;margin:8px 0}
+      .card a{text-decoration:none}
+      .status{font-size:.8rem;opacity:.7}
+    </style>
+    <div class="roadmap">
+      ${columns.map(c=>`
+        <div class="col">
+          <h3>${c}</h3>
+          ${(byStatus[c]||[]).map(it=>`
+            <div class="card">
+              <div><a href="${it.url ?? '#'}" target="_blank" rel="noopener">${it.title}</a></div>
+              ${it.repo ? `<div class="status">${it.repo}</div>`:''}
+            </div>
+          `).join('')}
+        </div>
+      `).join('')}
+    </div>
+  `;
+})();
+</script>
