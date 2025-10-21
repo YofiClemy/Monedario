@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.ROADMAP_PAT }}
-      LOGIN: YofiClemy         # your account (user or org)
-      PROJECT_NUMBER: "1"      # your project number
+      LOGIN: YofiClemy         # your GitHub username
+      PROJECT_NUMBER: "1"      # the project number from the URL
     steps:
       - uses: actions/checkout@v4
 
@@ -18,32 +18,42 @@ jobs:
           cat > query.graphql <<'GQL'
           query($login: String!, $number: Int!) {
             user(login: $login) {
-              projectV2(number: $number) { ...Proj }
-            }
-            organization(login: $login) {
-              projectV2(number: $number) { ...Proj }
-            }
-          }
-          fragment Proj on ProjectV2 {
-            title
-            url
-            fields(first: 50) {
-              nodes { __typename ... on ProjectV2SingleSelectField { id name options { id name } } }
-            }
-            items(first: 200) {
-              nodes {
-                content {
-                  __typename
-                  ... on Issue { title url number repository { nameWithOwner } labels(first:10){nodes{name}} }
-                  ... on PullRequest { title url number repository { nameWithOwner } }
-                  ... on DraftIssue { title body }
-                }
-                fieldValues(first: 20) {
+              projectV2(number: $number) {
+                title
+                url
+                fields(first: 50) {
                   nodes {
                     __typename
-                    ... on ProjectV2ItemFieldSingleSelectValue {
-                      field { __typename ... on ProjectV2SingleSelectField { name } }
+                    ... on ProjectV2SingleSelectField {
+                      id
                       name
+                      options { id name }
+                    }
+                  }
+                }
+                items(first: 100) {         # <= within GitHub limit
+                  nodes {
+                    content {
+                      __typename
+                      ... on Issue {
+                        title url number
+                        repository { nameWithOwner }
+                        labels(first:10){nodes{name}}
+                      }
+                      ... on PullRequest {
+                        title url number
+                        repository { nameWithOwner }
+                      }
+                      ... on DraftIssue { title body }
+                    }
+                    fieldValues(first: 20) {
+                      nodes {
+                        __typename
+                        ... on ProjectV2ItemFieldSingleSelectValue {
+                          field { __typename ... on ProjectV2SingleSelectField { name } }
+                          name
+                        }
+                      }
                     }
                   }
                 }
@@ -69,17 +79,17 @@ jobs:
             console.error("GraphQL errors:", JSON.stringify(data.errors, null, 2));
             process.exit(1);
           }
-          const proj = data?.data?.user?.projectV2 || data?.data?.organization?.projectV2;
+          const proj = data?.data?.user?.projectV2;
           if (!proj) {
-            console.error("No project found. Check LOGIN/PROJECT_NUMBER and token scopes (User permissions: Projects: Read).");
+            console.error("No project found. Check LOGIN/PROJECT_NUMBER and that your token has User → Projects: Read.");
             process.exit(1);
           }
 
-          const statusFieldName = 'Status'; // adjust to your field name
+          const STATUS_FIELD = 'Status'; // change if your single-select field has another name
           const items = (proj.items.nodes || []).map(n => {
             const c = n.content || {};
-            const status = (n.fieldValues?.nodes||[])
-              .find(v => v.field && v.field.name === statusFieldName)?.name || 'Backlog';
+            const status = (n.fieldValues?.nodes || [])
+              .find(v => v.field && v.field.name === STATUS_FIELD)?.name || 'Backlog';
             const title = c.title || '(untitled)';
             const url = c.url || null;
             const repo = c.repository?.nameWithOwner || null;
