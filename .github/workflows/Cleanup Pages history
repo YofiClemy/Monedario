@@ -1,0 +1,44 @@
+name: Cleanup Pages history
+
+on:
+  schedule:
+    - cron: "17 3 * * 0"   # Sundays 03:17 UTC
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  deployments: write
+  contents: read
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old GitHub Pages deployments (keep 3 newest)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          KEEP: 3
+        run: |
+          set -euo pipefail
+          ids=$(gh api -X GET "repos/$REPO/deployments?environment=github-pages" --paginate -q '.[].id' | tac)
+          i=0
+          for id in $ids; do
+            i=$((i+1))
+            [ -z "$id" ] && continue
+            if [ $i -le $KEEP ]; then
+              echo "Keeping $id"
+              continue
+            fi
+            echo "Inactivating $id"; gh api -X POST "repos/$REPO/deployments/$id/statuses" -f state=inactive >/dev/null
+            echo "Deleting $id";     gh api -X DELETE "repos/$REPO/deployments/$id" >/dev/null
+          done
+
+      - name: Delete old Pages build workflow runs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # delete all historical runs of "Pages build and deployment"
+          gh run list --workflow "Pages build and deployment" --limit 1000 \
+            --json databaseId -q '.[].databaseId' \
+          | xargs -r -n1 -I{} gh run delete {} --yes
