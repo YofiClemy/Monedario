@@ -102,9 +102,10 @@
 
     /* Features grid - neutral, no color overlays */
     .features{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px}
-    .card h3{margin:0 0 6px;font-size:1rem}
-    .card p{margin:0;color:var(--muted);font-size:.95rem}
+    .card{border:1px solid rgba(12,97,89,.14);border-radius:16px;padding:18px 18px 20px;position:relative;overflow:hidden;background:linear-gradient(155deg,rgba(12,97,89,.18) 0%, rgba(12,97,89,.06) 48%, #ffffff 100%);box-shadow:0 8px 18px rgba(11,17,22,.06);transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(11,17,22,.14)}
+    .card h3{margin:0 0 6px;font-size:1rem;position:relative}
+    .card p{margin:0;color:var(--muted);font-size:.95rem;position:relative}
 
     /* Roadmap - keep colored status accents */
     .roadmap-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
@@ -129,11 +130,10 @@
     body.theme-dark .nav{background:rgba(11,15,20,.7);border-bottom:1px solid var(--line-dark)}
     body.theme-dark .nav a{color:#dbe5ea}
     body.theme-dark .nav a.cta{background:#0f8f83;border-color:#0f8f83}
-    body.theme-dark main .wrap,
-    body.theme-dark .card,
+    body.theme-dark main .wrap{background:#0b0f14}
+    body.theme-dark .card{background:linear-gradient(155deg,rgba(34,179,166,.32) 0%, rgba(12,97,89,.22) 45%, rgba(11,17,22,.95) 100%);border-color:rgba(34,179,166,.28);box-shadow:0 20px 36px rgba(0,0,0,.45)}
     body.theme-dark .col,
     body.theme-dark .rm-card{background:#0b0f14}
-    body.theme-dark .card,
     body.theme-dark .col,
     body.theme-dark .rm-card{border-color:var(--line-dark)}
     body.theme-dark .count{background:#111827;border-color:#374151;color:#cbd5e1}
@@ -151,20 +151,19 @@
     body.theme-dark .shots-btn{background:#162027;border-color:#1f2d37;color:#f4fcfb;box-shadow:0 6px 16px rgba(0,0,0,.25)}
     body.theme-dark .shots-btn:hover{background:#1e2d36;border-color:#28404c}
     body.hero-transition .hero-device.is-floating .screen{box-shadow:none}
-    body.hero-transition .hero-slot img{opacity:.65}
+    body.hero-transition .hero-slot img{opacity:0;visibility:hidden}
     body.hero-docked .hero-device{opacity:0;pointer-events:none}
-    body.hero-docked .hero-slot img{opacity:1}
+    body.hero-docked .hero-slot img{opacity:1;visibility:visible}
 
     @media (prefers-color-scheme: dark){
       body:not(.theme-light){background:#0b0f14;color:#dbe5ea;color-scheme:dark}
       body:not(.theme-light) .nav{background:rgba(11,15,20,.7);border-bottom:1px solid var(--line-dark)}
       body:not(.theme-light) .nav a{color:#dbe5ea}
       body:not(.theme-light) .nav a.cta{background:#0f8f83;border-color:#0f8f83}
-      body:not(.theme-light) main .wrap,
-      body:not(.theme-light) .card,
+      body:not(.theme-light) main .wrap{background:#0b0f14}
+      body:not(.theme-light) .card{background:linear-gradient(155deg,rgba(34,179,166,.32) 0%, rgba(12,97,89,.22) 45%, rgba(11,17,22,.95) 100%);border-color:rgba(34,179,166,.28);box-shadow:0 20px 36px rgba(0,0,0,.45)}
       body:not(.theme-light) .col,
       body:not(.theme-light) .rm-card{background:#0b0f14}
-      body:not(.theme-light) .card,
       body:not(.theme-light) .col,
       body:not(.theme-light) .rm-card{border-color:var(--line-dark)}
       body:not(.theme-light) .count{background:#111827;border-color:#374151;color:#cbd5e1}
@@ -182,7 +181,7 @@
       body:not(.theme-light) .shots-btn{background:#162027;border-color:#1f2d37;color:#f4fcfb;box-shadow:0 6px 16px rgba(0,0,0,.25)}
       body:not(.theme-light) .shots-btn:hover{background:#1e2d36;border-color:#28404c}
       body:not(.theme-light).hero-transition .hero-device.is-floating .screen{box-shadow:none}
-      body:not(.theme-light).hero-transition .hero-slot img{opacity:.75}
+      body:not(.theme-light).hero-transition .hero-slot img{opacity:0;visibility:hidden}
     }
 
     /* A11y */
@@ -190,7 +189,10 @@
     .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
     .skip:focus{position:static;width:auto;height:auto;padding:8px 10px;background:#fff;border:1px solid var(--line);border-radius:10px;margin:8px}
 
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;scroll-padding-top:80px}
+    @media (max-width:600px){
+      html{scroll-padding-top:120px}
+    }
   </style>
 </head>
 <body>
@@ -237,6 +239,29 @@
     </div>
   </header>
 
+
+
+  <main id="main">
+    <!-- Features -->
+    <section id="features">
+      <div class="wrap">
+        <h2 class="section-title">Stay in control without the noise</h2>
+        <p class="section-lede">Calendar‑based flow, privacy first, Areas to group categories, fast capture, and robust import/export.</p>
+        <div class="features">
+          <div class="card card-1"><h3>Calendar + Heat Map</h3><p>Toggleable heat map to spot outliers quickly.</p></div>
+          <div class="card card-2"><h3>Daily reminders</h3><p>Adjustable, option: only if you didn’t log today.</p></div>
+          <div class="card card-3"><h3>Privacy & Face ID</h3><p>Privacy mode hides amounts. App is secured with Face ID/Touch ID.</p></div>
+          <div class="card card-4"><h3>Preset sheets</h3><p>One‑tap templates for common transactions.</p></div>
+          <div class="card card-5"><h3>Areas & Categories</h3><p>Group categories into larger Areas for cleaner charts.</p></div>
+          <div class="card card-6"><h3>Cummulative chart</h3><p>See daily spending through the month at a glance.</p></div>
+          <div class="card card-7"><h3>Local statistics</h3><p>On‑device analytics with export & delete.</p></div>
+          <div class="card card-8"><h3>CSV import/export</h3><p>Easy import with prefilled csv. Export all freely without constraint or payment.</p></div>
+          <div class="card card-9"><h3>Currency & regional</h3><p>Currency, symbol placement, separators, date format, week start.</p></div>
+          <div class="card card-10"><h3>Accessibility</h3><p>VoiceOver, Larger/Bold Text, Reduce Motion, Switch Control.</p></div>
+          <div class="card card-11"><h3>Languages</h3><p>English · Español · Français and more to come</p></div>
+        </div>
+      </div>
+    </section>
   <!-- Screenshots -->
   <section id="screenshots">
     <div class="wrap">
@@ -270,36 +295,14 @@
     </div>
   </section>
 
-  <main id="main">
-    <!-- Features -->
-    <section id="features">
-      <div class="wrap">
-        <h2 class="section-title">Stay in control without the noise</h2>
-        <p class="section-lede">Calendar‑based flow, privacy first, Areas to group categories, fast capture, and robust import/export.</p>
-        <div class="features">
-          <div class="card"><h3>Calendar + Heat Map</h3><p>Toggleable heat map to spot outliers quickly.</p></div>
-          <div class="card"><h3>Daily reminders</h3><p>Adjustable, option: only if you didn’t log today.</p></div>
-          <div class="card"><h3>Privacy & Face ID</h3><p>Privacy mode hides amounts. App is secured with Face ID/Touch ID.</p></div>
-          <div class="card"><h3>Preset sheets</h3><p>One‑tap templates for common transactions.</p></div>
-          <div class="card"><h3>Areas & Categories</h3><p>Group categories into larger Areas for cleaner charts.</p></div>
-          <div class="card"><h3>Cummulative chart</h3><p>See daily spending through the month at a glance.</p></div>
-          <div class="card"><h3>Local statistics</h3><p>On‑device analytics with export & delete.</p></div>
-          <div class="card"><h3>CSV import/export</h3><p>Easy import with prefilled csv. Export all freely without constraint or payment.</p></div>
-          <div class="card"><h3>Currency & regional</h3><p>Currency, symbol placement, separators, date format, week start.</p></div>
-          <div class="card"><h3>Accessibility</h3><p>VoiceOver, Larger/Bold Text, Reduce Motion, Switch Control.</p></div>
-          <div class="card"><h3>Languages</h3><p>English · Español · Français and more to come</p></div>
-        </div>
-      </div>
-    </section>
-
     <!-- Import/Export specifics -->
     <section>
       <div class="wrap">
         <h2 class="section-title">Import & Export</h2>
         <div class="features">
-          <div class="card"><h3>Exports</h3><p>CSV - Transactions, Categories/Areas, Local Statistics. Full backup (JSON).</p></div>
-          <div class="card"><h3>Imports</h3><p>CSV - Transactions + Categories/Areas. Restore from Backup.</p></div>
-          <div class="card"><h3>Regional parsing</h3><p>Choose decimal/thousand separators and date formats. Preview first.</p></div>
+          <div class="card card-12"><h3>Exports</h3><p>CSV - Transactions, Categories/Areas, Local Statistics. Full backup (JSON).</p></div>
+          <div class="card card-13"><h3>Imports</h3><p>CSV - Transactions + Categories/Areas. Restore from Backup.</p></div>
+          <div class="card card-14"><h3>Regional parsing</h3><p>Choose decimal/thousand separators and date formats. Preview first.</p></div>
         </div>
       </div>
     </section>
@@ -323,12 +326,12 @@
         <h2 class="section-title">Join the beta - premium is unlocked</h2>
         <p class="section-lede">iPhone, iPad, and macOS.</p>
         <div class="cta-row">
-          <a class="btn" style="background:var(--brand);color:#fff" href="https://testflight.apple.com/" target="_blank" rel="noopener">TestFlight (iOS/iPadOS)</a>
-          <a class="btn" style="border:1px solid var(--brand);color:var(--brand)" href="https://testflight.apple.com/" target="_blank" rel="noopener">TestFlight (macOS)</a>
-          <a class="btn" style="border:1px solid var(--line);color:var(--ink)" href="https://insigh.to/b/monedario" target="_blank" rel="noopener">Feature requests & votes</a>
-          <a class="btn" style="border:1px solid var(--line);color:var(--ink)" href="https://github.com/YofiClemy/Monedario/releases" target="_blank" rel="noopener">Changelog</a>
+          <a class="btn" style="background:var(--brand);color:#fff" href="https://testflight.apple.com/" target="_blank" rel="noopener">TestFlight - iOS/iPadOS</a>
+          <a class="btn" style="background:var(--brand);color:#fff" href="https://testflight.apple.com/" target="_blank" rel="noopener">TestFlight - macOS (coming soon)</a>
+          <a class="btn" style="border:1px solid var(--brand);color:var(--brand)" href="https://insigh.to/b/monedario" target="_blank" rel="noopener">Feature requests & votes</a>
+          <a class="btn" style="border:1px solid var(--brand);color:var(--brand)" href="https://github.com/YofiClemy/Monedario/releases" target="_blank" rel="noopener">Changelog</a>
         </div>
-        <p class="section-lede" style="margin-top:10px">Privacy‑first: data stays on your device by default; iCloud sync optional. Export and delete anytime.</p>
+        <p class="section-lede" style="margin-top:10px">Privacy‑first: data stays on your device by default. iCloud sync optional. Export and delete anytime.</p>
       </div>
     </section>
   </main>
