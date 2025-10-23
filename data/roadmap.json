@@ -3,7 +3,7 @@
     "title": "Roadmap",
     "url": "https://github.com/users/YofiClemy/projects/1"
   },
-  "updatedAt": "2025-10-22T18:15:28.209Z",
+  "updatedAt": "2025-10-23T00:44:41.825Z",
   "items": [
     {
       "title": "Budget tracker per category",
@@ -29,7 +29,9 @@
       "title": "Subscription / Recurrent detection",
       "url": "https://github.com/YofiClemy/Monedario/issues/3",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Planned - accepted",
       "type": "Issue"
     },
@@ -37,7 +39,9 @@
       "title": "App intents (long press icon)",
       "url": "https://github.com/YofiClemy/Monedario/issues/4",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Planned - accepted",
       "type": "Issue"
     },
@@ -45,7 +49,9 @@
       "title": "Shortcuts integration",
       "url": "https://github.com/YofiClemy/Monedario/issues/5",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Under review",
       "type": "Issue"
     },
@@ -53,7 +59,9 @@
       "title": "30 days forecast",
       "url": "https://github.com/YofiClemy/Monedario/issues/6",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Under review",
       "type": "Issue"
     },
@@ -61,7 +69,9 @@
       "title": "Spendings / Savings goals",
       "url": "https://github.com/YofiClemy/Monedario/issues/7",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Planned - accepted",
       "type": "Issue"
     },
@@ -79,7 +89,9 @@
       "title": "Recurring skip / Adjust amount once",
       "url": "https://github.com/YofiClemy/Monedario/issues/14",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Planned - accepted",
       "type": "Issue"
     },
@@ -87,7 +99,9 @@
       "title": "Envelopes tracking (Savings)",
       "url": "https://github.com/YofiClemy/Monedario/issues/8",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Under review",
       "type": "Issue"
     },
@@ -95,7 +109,9 @@
       "title": "Split transactions",
       "url": "https://github.com/YofiClemy/Monedario/issues/9",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Under review",
       "type": "Issue"
     },
@@ -103,7 +119,9 @@
       "title": "Inline calculator / Quick math in amount field",
       "url": "https://github.com/YofiClemy/Monedario/issues/10",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Under review",
       "type": "Issue"
     },
@@ -111,7 +129,9 @@
       "title": "Attachments for receipts in transactions",
       "url": "https://github.com/YofiClemy/Monedario/issues/11",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Under review",
       "type": "Issue"
     },
@@ -119,7 +139,9 @@
       "title": "Anomaly banner for the day (If spending more than usual)",
       "url": "https://github.com/YofiClemy/Monedario/issues/12",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Under review",
       "type": "Issue"
     },
@@ -127,7 +149,9 @@
       "title": "Interactive widget (Quick add)",
       "url": "https://github.com/YofiClemy/Monedario/issues/13",
       "repo": "YofiClemy/Monedario",
-      "labels": [],
+      "labels": [
+        "Feature request"
+      ],
       "status": "Under review",
       "type": "Issue"
     }
