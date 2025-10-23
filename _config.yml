@@ -10,15 +10,15 @@ sass:
   load_paths:
     - _themes/just-the-docs/_sass
 
-just_the_docs:
-  logo: "/assets/monedario-logo.png"
-  favicon_ico: "/assets/favicon.ico"
-  nav_external_links:
+
+logo: "/assets/monedario-logo.png"
+favicon_ico: "/assets/favicon.ico"
+nav_external_links:
     - title: TestFlight iOS
       url: https://testflight.apple.com/join/
     - title: TestFlight macOS (Coming soon)
       url: https://testflight.apple.com/
-  aux_links_new_tab: true 
+aux_links_new_tab: true 
 
 # Navigation
 nav_order: 1
