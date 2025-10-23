@@ -2,8 +2,13 @@ title: Monedario
 description: Calendar-first personal finance app for iPhone, iPad, and macOS.
 url: "https://yoficlemy.github.io"
 baseurl: "/Monedario"
-remote_theme: "just-the-docs/just-the-docs@v0.8.2"
 color_scheme: "light"
+
+includes_dir: _themes/just-the-docs/_includes
+layouts_dir:  _themes/just-the-docs/_layouts
+sass:
+  load_paths:
+    - _themes/just-the-docs/_sass
 
 just_the_docs:
   logo: "/assets/monedario-logo.png"
@@ -13,6 +18,7 @@ just_the_docs:
       url: https://testflight.apple.com/join/
     - title: TestFlight macOS (Coming soon)
       url: https://testflight.apple.com/
+  aux_links_new_tab: true 
 
 # Navigation
 nav_order: 1
@@ -26,6 +32,6 @@ aux_links:
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-include-cache
 
-# Internationalization
-languages: ["en", "es", "fr"]
+# languages: ["en", "es", "fr"]

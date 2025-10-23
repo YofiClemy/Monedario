@@ -44,16 +44,22 @@
     .nav .wrap{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--brand);letter-spacing:.2px}
     .brand .logo{width:24px;height:24px;display:block;border-radius:5px}
-    .nav a{color:var(--ink);text-decoration:none;font-weight:600;margin-left:16px}
+    .nav a{color:var(--ink);text-decoration:none;font-weight:600}
     .nav a.cta{color:#fff;background:var(--brand);padding:10px 14px;border-radius:12px;border:1px solid var(--brand)}
     .nav a.cta:hover{background:var(--brand-hover)}
+    .nav-actions{display:flex;align-items:center;gap:16px}
+    .theme-toggle{appearance:none;border:1px solid var(--line);background:rgba(12,97,89,.06);color:var(--ink);border-radius:12px;padding:8px 12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;line-height:1;transition:background .2s,border-color .2s,color .2s}
+    .theme-toggle:hover{background:rgba(12,97,89,.12)}
+    .theme-toggle:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+    .theme-toggle-icon{font-size:1.05rem;line-height:1}
+    .inline-toggle{margin-left:12px;padding:6px 10px;font-size:.9rem;border-radius:10px;vertical-align:middle}
 
-    /* Hero — color gradients behind content */
+    /* Hero - color gradients behind content */
     .hero{color:#fff;background:
       radial-gradient(1000px 600px at 20% -10%, var(--hero-grad-3), transparent),
       radial-gradient(1200px 700px at 110% 10%, var(--hero-grad-2), transparent),
       linear-gradient(180deg, #0e171c 0%, #0b0f14 100%)}
-    .hero .wrap{max-width:1120px;margin:0 auto;padding:84px 20px 72px;display:grid;gap:40px;grid-template-columns:1.15fr .85fr;align-items:center}
+    .hero .wrap{max-width:1120px;margin:0 auto;padding:48px 20px 40px;display:grid;gap:28px;grid-template-columns:1.15fr .85fr;align-items:center}
     .eyebrow{display:inline-block;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);padding:6px 10px;border-radius:999px;font-size:.85rem}
     .h1{font-size: clamp(2.1rem, 4vw, 3rem);margin:12px 0 10px;font-weight:800;letter-spacing:-.02em}
     .lede{font-size:1.05rem;line-height:1.6;color:#cfe1de}
@@ -65,37 +71,42 @@
     .btn.ghost:hover{background:rgba(255,255,255,.06)}
 
     /* Device mock */
-    .device{width:100%;max-width:520px;justify-self:end;background:#0c1116;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:14px;aspect-ratio:9/19.5}
-    .device .screen{background:#0e171c;border-radius:18px;width:100%;height:100%;overflow:hidden;position:relative}
-    .device .screen img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+    .device{width:100%;max-width:520px;justify-self:end;display:flex;align-items:center;justify-content:center;padding:0;background:transparent;border:none}
+    .device .screen{width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:none;border-radius:0;box-shadow:none;overflow:visible;position:static}
+    .device .screen img{display:block;width:100%;height:auto;object-fit:contain;object-position:center}
+    .hero-device{position:relative;z-index:1;transition:transform .8s cubic-bezier(.16,.84,.44,1), opacity .3s ease .1s;transform-origin:top left;will-change:transform}
+    .hero-device.is-floating{z-index:50}
+    .hero-slot{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:16px;overflow:hidden;position:relative;background:transparent}
+    .hero-slot img{width:100%;height:100%;object-fit:contain;border-radius:0;opacity:0;transition:opacity .4s ease;filter:none}
 
     /* Sections */
-    section{padding:84px 20px}
+    section{padding:48px 20px}
     .wrap{max-width:1120px;margin:0 auto}
     .section-title{font-size:clamp(1.7rem,3vw,2.2rem);margin:0 0 10px;font-weight:800;color:var(--ink)}
-    .section-lede{color:var(--muted);margin:0 0 26px;max-width:72ch}
+    .section-lede{color:var(--muted);margin:0 0 20px;max-width:72ch}
 
-    /* Screenshots section — calm carousel with scroll-snap */
+    /* Screenshots section - calm carousel with scroll-snap */
     .shots-wrap{position:relative}
-    .sshots{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
-    .sshot{scroll-snap-align:start;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:8px;display:flex;align-items:center;justify-content:center;aspect-ratio:9/19.5}
-    .sshot img{width:100%;height:100%;object-fit:contain;border-radius:12px}
+    .sshots{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none}
+    .sshots::-webkit-scrollbar{display:none}
+    .sshot{scroll-snap-align:start;background:transparent;border:none;border-radius:0;padding:0;display:flex;align-items:center;justify-content:center;aspect-ratio:9/19.5}
+    .sshot img{width:100%;height:100%;object-fit:contain;border-radius:0;box-shadow:none}
     .shots-nav{display:flex;gap:8px;justify-content:flex-end;margin:10px 4px 0}
-    .shots-btn{appearance:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 10px;cursor:pointer}
-    .shots-btn:hover{border-color:#cfd5db}
+    .shots-btn{appearance:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 10px;cursor:pointer;color:var(--ink);box-shadow:0 6px 16px rgba(12,17,22,.08)}
+    .shots-btn:hover{border-color:#cfd5db;background:#f7fafc}
     .dots{display:flex;gap:6px;justify-content:center;margin-top:10px}
     .dot{width:6px;height:6px;border-radius:999px;background:#cfd5db}
     .dot.is-active{background:var(--brand)}
 
     @media (min-width: 900px){ .sshots{grid-auto-columns:30%} }
 
-    /* Features grid — neutral, no color overlays */
+    /* Features grid - neutral, no color overlays */
     .features{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
     .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px}
     .card h3{margin:0 0 6px;font-size:1rem}
     .card p{margin:0;color:var(--muted);font-size:.95rem}
 
-    /* Roadmap — keep colored status accents */
+    /* Roadmap - keep colored status accents */
     .roadmap-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .col{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px}
     .col h3{margin:0 0 8px;font-size:1rem;display:flex;align-items:center;gap:.5rem}
@@ -113,23 +124,65 @@
     .footer-grid{max-width:1120px;margin:0 auto;display:grid;gap:12px;grid-template-columns:1fr auto}
 
     /* Dark mode */
+    body.theme-light{color-scheme:light}
+    body.theme-dark{background:#0b0f14;color:#dbe5ea;color-scheme:dark}
+    body.theme-dark .nav{background:rgba(11,15,20,.7);border-bottom:1px solid var(--line-dark)}
+    body.theme-dark .nav a{color:#dbe5ea}
+    body.theme-dark .nav a.cta{background:#0f8f83;border-color:#0f8f83}
+    body.theme-dark main .wrap,
+    body.theme-dark .card,
+    body.theme-dark .col,
+    body.theme-dark .rm-card{background:#0b0f14}
+    body.theme-dark .card,
+    body.theme-dark .col,
+    body.theme-dark .rm-card{border-color:var(--line-dark)}
+    body.theme-dark .count{background:#111827;border-color:#374151;color:#cbd5e1}
+    body.theme-dark .rm-card a{color:#22b3a6}
+    body.theme-dark .section-title{color:#e7f6f4}
+    body.theme-dark .section-lede{color:#9fb0b4}
+    body.theme-dark footer{border-top-color:var(--line-dark)}
+    body.theme-dark .rm-card::before{background:#1f2937}
+    body.theme-dark .rm-card.rm-now::before{background:rgba(34,179,166,.35)}
+    body.theme-dark .rm-card.rm-plan::before{background:rgba(99,102,241,.28)}
+    body.theme-dark .rm-card.rm-rev::before{background:rgba(245,158,11,.30)}
+    body.theme-dark .rm-card.rm-done::before{background:rgba(16,185,129,.30)}
+    body.theme-dark .theme-toggle{border-color:var(--line-dark);background:rgba(34,179,166,.14);color:#e6fbf7}
+    body.theme-dark .theme-toggle:hover{background:rgba(34,179,166,.2)}
+    body.theme-dark .shots-btn{background:#162027;border-color:#1f2d37;color:#f4fcfb;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+    body.theme-dark .shots-btn:hover{background:#1e2d36;border-color:#28404c}
+    body.hero-transition .hero-device.is-floating .screen{box-shadow:none}
+    body.hero-transition .hero-slot img{opacity:.65}
+    body.hero-docked .hero-device{opacity:0;pointer-events:none}
+    body.hero-docked .hero-slot img{opacity:1}
+
     @media (prefers-color-scheme: dark){
-      body{background:#0b0f14;color:#dbe5ea}
-      .nav{background:rgba(11,15,20,.7);border-bottom:1px solid var(--line-dark)}
-      .nav a{color:#dbe5ea}
-      .nav a.cta{background:#0f8f83;border-color:#0f8f83}
-      .wrap, .card, .col, .rm-card{background:#0b0f14}
-      .card, .col, .rm-card{border-color:var(--line-dark)}
-      .count{background:#111827;border-color:#374151;color:#cbd5e1}
-      .rm-card a{color:#22b3a6}
-      .section-title{color:#e7f6f4}
-      .section-lede{color:#9fb0b4}
-      footer{border-top-color:var(--line-dark)}
-      .rm-card::before{background:#1f2937}
-      .rm-card.rm-now::before{background:rgba(34,179,166,.35)}
-      .rm-card.rm-plan::before{background:rgba(99,102,241,.28)}
-      .rm-card.rm-rev::before{background:rgba(245,158,11,.30)}
-      .rm-card.rm-done::before{background:rgba(16,185,129,.30)}
+      body:not(.theme-light){background:#0b0f14;color:#dbe5ea;color-scheme:dark}
+      body:not(.theme-light) .nav{background:rgba(11,15,20,.7);border-bottom:1px solid var(--line-dark)}
+      body:not(.theme-light) .nav a{color:#dbe5ea}
+      body:not(.theme-light) .nav a.cta{background:#0f8f83;border-color:#0f8f83}
+      body:not(.theme-light) main .wrap,
+      body:not(.theme-light) .card,
+      body:not(.theme-light) .col,
+      body:not(.theme-light) .rm-card{background:#0b0f14}
+      body:not(.theme-light) .card,
+      body:not(.theme-light) .col,
+      body:not(.theme-light) .rm-card{border-color:var(--line-dark)}
+      body:not(.theme-light) .count{background:#111827;border-color:#374151;color:#cbd5e1}
+      body:not(.theme-light) .rm-card a{color:#22b3a6}
+      body:not(.theme-light) .section-title{color:#e7f6f4}
+      body:not(.theme-light) .section-lede{color:#9fb0b4}
+      body:not(.theme-light) footer{border-top-color:var(--line-dark)}
+      body:not(.theme-light) .rm-card::before{background:#1f2937}
+      body:not(.theme-light) .rm-card.rm-now::before{background:rgba(34,179,166,.35)}
+      body:not(.theme-light) .rm-card.rm-plan::before{background:rgba(99,102,241,.28)}
+      body:not(.theme-light) .rm-card.rm-rev::before{background:rgba(245,158,11,.30)}
+      body:not(.theme-light) .rm-card.rm-done::before{background:rgba(16,185,129,.30)}
+      body:not(.theme-light) .theme-toggle{border-color:var(--line-dark);background:rgba(34,179,166,.14);color:#e6fbf7}
+      body:not(.theme-light) .theme-toggle:hover{background:rgba(34,179,166,.2)}
+      body:not(.theme-light) .shots-btn{background:#162027;border-color:#1f2d37;color:#f4fcfb;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+      body:not(.theme-light) .shots-btn:hover{background:#1e2d36;border-color:#28404c}
+      body:not(.theme-light).hero-transition .hero-device.is-floating .screen{box-shadow:none}
+      body:not(.theme-light).hero-transition .hero-slot img{opacity:.75}
     }
 
     /* A11y */
@@ -147,15 +200,18 @@
   <nav class="nav" aria-label="Main">
     <div class="wrap">
       <div class="brand" aria-label="Monedario">
-        <!-- Fixed-color image logo -->
-        <img class="logo" src="assets/app-icon.png" alt="Monedario logo">
+        <img class="logo" src="assets/app-icon.png" data-light="assets/app-icon.png" data-dark="assets/app-icon-dark.png" alt="Monedario logo">
         <span>Monedario</span>
       </div>
-      <div>
-        <a href="#features">Features</a>
+      <div class="nav-actions">
         <a href="#screenshots">Screenshots</a>
+        <a href="#features">Features</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#download" class="cta">Join beta</a>
+        <button type="button" id="theme-toggle" class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+          <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+          <span class="theme-toggle-text">Dark</span>
+        </button>
       </div>
     </div>
   </nav>
@@ -165,7 +221,7 @@
     <div class="wrap">
       <div>
         <span class="eyebrow">Premium unlocked during beta</span>
-        <h1 class="h1">See your money on a calendar. <br/>Fast, private, multilingual.</h1>
+        <h1 class="h1">Your money on a calendar. <br/>Fast, private, multilingual.</h1>
         <p class="lede">Monedario helps you plan and track spending by day with a simple calendar, fast‑add presets, recurring, and clear local stats. Data stays on your device. iPhone, iPad, and macOS.</p>
         <div class="cta-row">
           <a class="btn primary" href="#download" aria-label="Join the beta on TestFlight">Join the Beta</a>
@@ -173,20 +229,25 @@
         </div>
         <p class="lede" style="margin-top:14px;color:#b9cbc8">English · Español · Français · Currency & regional formats</p>
       </div>
-      <div class="device" aria-hidden="true">
+      <div class="device hero-device" aria-hidden="true">
         <div class="screen">
-          <!-- Replace the src with your real screenshot (PNG/WebP). Tall iPhone portrait works best. -->
-          <img src="assets/app-screenshot.png" alt="Monedario app screenshot" loading="lazy">
+          <img class="hero-shot" src="assets/app-screenshot.png" data-light="assets/app-screenshot.png" data-dark="assets/app-screenshot-dark.png" alt="Monedario app screenshot" loading="lazy">
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Screenshots (calm, like the reference sites) -->
+  <!-- Screenshots -->
   <section id="screenshots">
     <div class="wrap">
-      <h2 class="section-title">Screenshots</h2>
-      <p class="section-lede">A closer look at calendar, quick add, stats, and privacy mode.</p>
+      <h2 class="section-title">
+        Screenshots
+        <button type="button" class="theme-toggle inline-toggle" data-theme-toggle aria-label="Toggle dark mode">
+          <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+          <span class="theme-toggle-text">Dark</span>
+        </button>
+      </h2>
+      <p class="section-lede">A closer look at calendar, quick add, charts, and privacy mode.</p>
 
       <div class="shots-wrap">
         <div class="shots-nav">
@@ -195,12 +256,14 @@
         </div>
 
         <div class="sshots" id="shots">
-          <!-- Replace these src paths with your real assets -->
-          <div class="sshot"><img src="assets/shots/shot1.png" alt="Black appearance"></div>
-          <div class="sshot"><img src="assets/shots/shot2.png" alt="Fast add presets"></div>
-          <div class="sshot"><img src="assets/shots/shot3.png" alt="Areas and categories / Tappable charts"></div>
-          <div class="sshot"><img src="assets/shots/shot4.png" alt="Local statistics"></div>
-          <div class="sshot"><img src="assets/shots/shot5.png" alt="Privacy mode / Face ID"></div>
+          <div class="sshot hero-slot" id="hero-slot">
+            <img src="assets/app-screenshot.png" data-light="assets/app-screenshot.png" data-dark="assets/app-screenshot-dark.png" alt="Monedario hero screenshot">
+          </div>
+          <div class="sshot"><img src="assets/shots/shot1.png" data-light="assets/shots/shot1.png" data-dark="assets/shots/shot1-dark.png" alt="Clean appearance"></div>
+          <div class="sshot"><img src="assets/shots/shot4.png" data-light="assets/shots/shot4.png" data-dark="assets/shots/shot4-dark.png" alt="Areas and categories / Tappable charts"></div>
+          <div class="sshot"><img src="assets/shots/shot2.png" data-light="assets/shots/shot2.png" data-dark="assets/shots/shot2-dark.png" alt="Recurring calendar"></div>
+          <div class="sshot"><img src="assets/shots/shot3.png" data-light="assets/shots/shot3.png" data-dark="assets/shots/shot3-dark.png" alt="Customisable currencies, notifications and more"></div>
+          <div class="sshot"><img src="assets/shots/shot5.png" data-light="assets/shots/shot5.png" data-dark="assets/shots/shot5-dark.png" alt="Privacy first"></div>
         </div>
         <div class="dots" id="shot-dots" aria-hidden="true"></div>
       </div>
@@ -212,18 +275,19 @@
     <section id="features">
       <div class="wrap">
         <h2 class="section-title">Stay in control without the noise</h2>
-        <p class="section-lede">Calendar‑first flow, privacy by default, Areas to group categories, fast capture, and robust import/export.</p>
+        <p class="section-lede">Calendar‑based flow, privacy first, Areas to group categories, fast capture, and robust import/export.</p>
         <div class="features">
           <div class="card"><h3>Calendar + Heat Map</h3><p>Toggleable heat map to spot outliers quickly.</p></div>
-          <div class="card"><h3>Daily reminders</h3><p>Option: only if you didn’t log today.</p></div>
-          <div class="card"><h3>Privacy & Face ID</h3><p>Privacy mode hides amounts. Secure with Face ID/Touch ID.</p></div>
+          <div class="card"><h3>Daily reminders</h3><p>Adjustable, option: only if you didn’t log today.</p></div>
+          <div class="card"><h3>Privacy & Face ID</h3><p>Privacy mode hides amounts. App is secured with Face ID/Touch ID.</p></div>
           <div class="card"><h3>Preset sheets</h3><p>One‑tap templates for common transactions.</p></div>
           <div class="card"><h3>Areas & Categories</h3><p>Group categories into larger Areas for cleaner charts.</p></div>
+          <div class="card"><h3>Cummulative chart</h3><p>See daily spending through the month at a glance.</p></div>
           <div class="card"><h3>Local statistics</h3><p>On‑device analytics with export & delete.</p></div>
-          <div class="card"><h3>CSV import/export</h3><p>Header mapping, separators, dates (DD/MM, MM/DD). Export all.</p></div>
+          <div class="card"><h3>CSV import/export</h3><p>Easy import with prefilled csv. Export all freely without constraint or payment.</p></div>
           <div class="card"><h3>Currency & regional</h3><p>Currency, symbol placement, separators, date format, week start.</p></div>
           <div class="card"><h3>Accessibility</h3><p>VoiceOver, Larger/Bold Text, Reduce Motion, Switch Control.</p></div>
-          <div class="card"><h3>Languages</h3><p>English · Español · Français.</p></div>
+          <div class="card"><h3>Languages</h3><p>English · Español · Français and more to come</p></div>
         </div>
       </div>
     </section>
@@ -233,9 +297,9 @@
       <div class="wrap">
         <h2 class="section-title">Import & Export</h2>
         <div class="features">
-          <div class="card"><h3>Exports</h3><p>CSV — Transactions, Categories/Areas, Local Statistics. Full backup (JSON).</p></div>
-          <div class="card"><h3>Imports</h3><p>CSV — Transactions + Categories/Areas. Restore from Backup.</p></div>
-          <div class="card"><h3>Regional parsing</h3><p>Choose decimal/thousand separators and date formats; preview first.</p></div>
+          <div class="card"><h3>Exports</h3><p>CSV - Transactions, Categories/Areas, Local Statistics. Full backup (JSON).</p></div>
+          <div class="card"><h3>Imports</h3><p>CSV - Transactions + Categories/Areas. Restore from Backup.</p></div>
+          <div class="card"><h3>Regional parsing</h3><p>Choose decimal/thousand separators and date formats. Preview first.</p></div>
         </div>
       </div>
     </section>
@@ -244,10 +308,10 @@
     <section id="roadmap">
       <div class="wrap">
         <h2 class="section-title">Public Roadmap</h2>
-        <p class="section-lede">Live snapshot of Now, Planned, Under Review, and Done.</p>
+        <p class="section-lede">Live snapshot of what being Worked on, Planned, Under Review, and Done.</p>
         <div class="roadmap-grid" id="rm-grid"></div>
         <p id="rm-fallback" class="section-lede" hidden>
-          Can’t load the embedded roadmap. View it on GitHub:
+          Seems like we couldn't load the embedded roadmap. View it on GitHub:
           <a href="https://github.com/users/YofiClemy/projects/1" target="_blank" rel="noopener">Public Project</a>
         </p>
       </div>
@@ -256,7 +320,7 @@
     <!-- Download / CTA -->
     <section id="download">
       <div class="wrap">
-        <h2 class="section-title">Join the beta — premium is unlocked</h2>
+        <h2 class="section-title">Join the beta - premium is unlocked</h2>
         <p class="section-lede">iPhone, iPad, and macOS.</p>
         <div class="cta-row">
           <a class="btn" style="background:var(--brand);color:#fff" href="https://testflight.apple.com/" target="_blank" rel="noopener">TestFlight (iOS/iPadOS)</a>
@@ -271,20 +335,142 @@
 
   <footer>
     <div class="footer-grid">
-      <div>© <span id="y"></span> Monedario — Money Calendar</div>
+      <div>© <span id="y"></span> Monedario - Money Calendar</div>
       <div>
-        <a href="mailto:hello@monedario.app">hello@monedario.app</a>
-        · <a href="https://github.com/YofiClemy/Monedario" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/YofiClemy/Monedario" target="_blank" rel="noopener">GitHub</a>
         · <a href="#download">Join beta</a>
       </div>
     </div>
   </footer>
 
   <script>
+    (function(){
+      var toggles = document.querySelectorAll('[data-theme-toggle]');
+      if (!toggles.length) return;
+
+      var STORAGE_KEY = 'monedario-theme';
+      var body = document.body;
+      var media = window.matchMedia('(prefers-color-scheme: dark)');
+      var themedNodes = document.querySelectorAll('[data-light]');
+      var lastAssetTheme = null;
+      var prefetched = {};
+      var assetPromises = {};
+
+      function currentTheme(){
+        if (body.classList.contains('theme-dark')) return 'dark';
+        if (body.classList.contains('theme-light')) return 'light';
+        return media.matches ? 'dark' : 'light';
+      }
+
+      function updateToggles(){
+        var theme = currentTheme();
+        var next = theme === 'dark' ? 'light' : 'dark';
+        Array.prototype.forEach.call(toggles, function(btn){
+          var iconEl = btn.querySelector('.theme-toggle-icon');
+          var textEl = btn.querySelector('.theme-toggle-text');
+          if (iconEl) iconEl.textContent = next === 'dark' ? '☾' : '☀︎';
+          if (textEl) textEl.textContent = next === 'dark' ? 'Dark' : 'Light';
+          btn.setAttribute('aria-label', next === 'dark' ? 'Switch to dark mode' : 'Switch to light mode');
+          btn.setAttribute('data-theme-target', next);
+        });
+      }
+
+      function updateAssets(){
+        if (!themedNodes || !themedNodes.length) return;
+        var theme = currentTheme();
+        if (theme === lastAssetTheme) return;
+        Array.prototype.forEach.call(themedNodes, function(node){
+          var lightSrc = node.getAttribute('data-light');
+          var darkSrc = node.getAttribute('data-dark') || lightSrc;
+          var target = theme === 'dark' ? darkSrc : lightSrc;
+          if (!target) return;
+          var apply = function(){ 
+            if (node.tagName === 'IMG' && node.getAttribute('src') !== target){
+              node.setAttribute('src', target);
+            } else if (node.tagName === 'SOURCE' && node.getAttribute('srcset') !== target){
+              node.setAttribute('srcset', target);
+            }
+          };
+          var key = node.tagName + '::' + target;
+          var promise = assetPromises[key];
+          if (promise){
+            promise.then(apply).catch(apply);
+          } else {
+            apply();
+          }
+        });
+        lastAssetTheme = theme;
+      }
+
+      function preloadAssets(){
+        if (!themedNodes || !themedNodes.length) return;
+        Array.prototype.forEach.call(themedNodes, function(node){
+          var lightSrc = node.getAttribute('data-light');
+          var darkSrc = node.getAttribute('data-dark');
+          if (lightSrc && !prefetched[lightSrc]){
+            prefetched[lightSrc] = true;
+            assetPromises['IMG::'+lightSrc] = new Promise(function(resolve){
+              var imgLight = new Image();
+              imgLight.onload = imgLight.onerror = resolve;
+              imgLight.src = lightSrc;
+            });
+          }
+          if (darkSrc && !prefetched[darkSrc]){
+            prefetched[darkSrc] = true;
+            assetPromises['IMG::'+darkSrc] = new Promise(function(resolve){
+              var imgDark = new Image();
+              imgDark.onload = imgDark.onerror = resolve;
+              imgDark.src = darkSrc;
+            });
+          }
+        });
+      }
+
+      function refresh(){
+        preloadAssets();
+        updateToggles();
+        updateAssets();
+      }
+
+      function apply(theme){
+        body.classList.remove('theme-dark', 'theme-light');
+        if (theme === 'dark'){ body.classList.add('theme-dark'); }
+        else if (theme === 'light'){ body.classList.add('theme-light'); }
+        refresh();
+      }
+
+      function getStored(){
+        try { return localStorage.getItem(STORAGE_KEY); }
+        catch (err){ return null; }
+      }
+
+      function setStored(value){
+        try { localStorage.setItem(STORAGE_KEY, value); }
+        catch (err){ /* ignore */ }
+      }
+
+      var saved = getStored();
+      if (saved === 'dark' || saved === 'light'){ apply(saved); }
+      else refresh();
+
+      media.addEventListener('change', function(){
+        if (getStored()) return;
+        refresh();
+      });
+
+      Array.prototype.forEach.call(toggles, function(btn){
+        btn.addEventListener('click', function(){
+          var next = btn.getAttribute('data-theme-target') || (currentTheme() === 'dark' ? 'light' : 'dark');
+          apply(next);
+          setStored(next);
+        });
+      });
+    })();
+
     // Footer year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // ROADMAP RENDERER — neutral, with colored status accents
+    // ROADMAP RENDERER
     (function(){
       var grid = document.getElementById('rm-grid');
       var fallback = document.getElementById('rm-fallback');
@@ -304,12 +490,6 @@
         var top = document.createElement('div');
         var a = document.createElement('a'); a.href = it.url || '#'; a.target = '_blank'; a.rel = 'noopener'; a.textContent = it.title || '(untitled)';
         top.appendChild(a); w.appendChild(top);
-        if (it.repo){ var m = document.createElement('div'); m.className = 'updated'; m.style.marginTop = '4px'; m.textContent = it.repo; w.appendChild(m); }
-        if (Array.isArray(it.labels) && it.labels.length){
-          var labels = document.createElement('div'); labels.style.marginTop = '4px';
-          for (var i=0;i<it.labels.length;i++){ var s = document.createElement('span'); s.className='count'; s.textContent=it.labels[i]; labels.appendChild(s); labels.appendChild(document.createTextNode(' ')); }
-          w.appendChild(labels);
-        }
         return w;
       }
 
@@ -327,7 +507,7 @@
         .then(function(data){
           var items = Array.isArray(data.items) ? data.items : [];
           var order = ['now','plan','rev','done'];
-          var titles = { now:'Now / In Progress', plan:'Planned', rev:'Under Review', done:'Done' };
+          var titles = { now:'Now / In Progress', plan:'Planned', rev:'Under Review', done:'Recently added' };
           var maps = { now:[], plan:[], rev:[], done:[] };
           for (var i=0;i<items.length;i++){ var it = items[i]; maps[bucketName(it.status)].push(it); }
 
@@ -356,34 +536,180 @@
       var next = document.getElementById('shots-next');
       var dotsWrap = document.getElementById('shot-dots');
       var cards = track.querySelectorAll('.sshot');
-      var idx = 0;
+      var dots = [];
 
-      // build dots
-      for (var i=0;i<cards.length;i++){ var d=document.createElement('span'); d.className='dot'+(i===0?' is-active':''); dotsWrap.appendChild(d); }
-      var dots = dotsWrap.querySelectorAll('.dot');
-
-      function go(to){
-        if (to<0) to=0; if (to>cards.length-1) to=cards.length-1;
-        idx = to;
-        var left = cards[to].offsetLeft - track.offsetLeft;
-        track.scrollTo({left:left, behavior:'smooth'});
-        for (var i=0;i<dots.length;i++){ dots[i].classList.remove('is-active'); }
-        if (dots[to]) dots[to].classList.add('is-active');
-      }
-
-      function nearest(){
-        var scroll = track.scrollLeft;
-        var best = 0, bestDist = Infinity;
-        for (var i=0;i<cards.length;i++){
-          var dist = Math.abs(cards[i].offsetLeft - track.offsetLeft - scroll);
-          if (dist<bestDist){ best=i; bestDist=dist; }
+      function buildDots(){
+        dotsWrap.innerHTML = '';
+        var count = pageCount();
+        dots = [];
+        for (var i=0;i<count;i++){
+          var d=document.createElement('span');
+          d.className='dot'+(i===0?' is-active':'');
+          dotsWrap.appendChild(d);
+          dots.push(d);
         }
-        return best;
       }
 
-      track.addEventListener('scroll', function(){ idx = nearest(); for (var i=0;i<dots.length;i++){ dots[i].classList.toggle('is-active', i===idx); } });
-      if (prev) prev.addEventListener('click', function(){ go(idx-1); });
-      if (next) next.addEventListener('click', function(){ go(idx+1); });
+      function activateDot(page){
+        for (var i=0;i<dots.length;i++){ dots[i].classList.toggle('is-active', i===page); }
+      }
+
+      function pageCount(){
+        var view = track.clientWidth;
+        if (!view) return 1;
+        var extra = track.scrollWidth - view;
+        if (extra <= 0) return 1;
+        return Math.min(cards.length, Math.ceil(extra / view) + 1);
+      }
+
+      function currentPage(){
+        if (!dots.length) return 0;
+        if (dots.length === 1) return 0;
+        var maxScroll = Math.max(1, track.scrollWidth - track.clientWidth);
+        var ratio = track.scrollLeft / maxScroll;
+        if (!isFinite(ratio)) ratio = 0;
+        var page = Math.round(ratio * (dots.length - 1));
+        if (page < 0) page = 0;
+        if (page > dots.length - 1) page = dots.length - 1;
+        return page;
+      }
+
+      function go(page){
+        if (page < 0) page = 0;
+        if (page > dots.length-1) page = dots.length-1;
+        if (dots.length <= 1){
+          activateDot(0);
+          return;
+        }
+        var maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+        var target = (page / (dots.length - 1)) * maxScroll;
+        track.scrollTo({left:target, behavior:'smooth'});
+        activateDot(page);
+      }
+
+      function onResize(){
+        var activePage = currentPage();
+        buildDots();
+        activateDot(Math.min(activePage, dots.length-1));
+      }
+
+      buildDots();
+      window.addEventListener('resize', onResize);
+
+      track.addEventListener('scroll', function(){
+        activateDot(currentPage());
+      });
+
+      if (prev) prev.addEventListener('click', function(){ go(currentPage()-1); });
+      if (next) next.addEventListener('click', function(){ go(currentPage()+1); });
+    })();
+
+    (function(){
+      var hero = document.querySelector('.hero-device');
+      var slot = document.getElementById('hero-slot');
+      var section = document.getElementById('screenshots');
+      if (!hero || !slot || !section) return;
+
+      var body = document.body;
+      var isDocked = false;
+      var isTransitioning = false;
+      var timer = null;
+      var target = null;
+
+      function computeTarget(){
+        var heroRect = hero.getBoundingClientRect();
+        var slotRect = slot.getBoundingClientRect();
+        if (!heroRect.width || !slotRect.width) return false;
+        if (heroRect.bottom <= 0 || heroRect.top >= window.innerHeight) return false;
+        var scale = slotRect.width / heroRect.width;
+        if (!isFinite(scale) || scale === 0) scale = 1;
+        var targetCenterX = slotRect.left + slotRect.width / 2;
+        var targetCenterY = slotRect.top + slotRect.height / 2;
+        var scaledHeroWidth = heroRect.width * scale;
+        var scaledHeroHeight = heroRect.height * scale;
+        var dx = targetCenterX - (heroRect.left + scaledHeroWidth / 2);
+        var dy = targetCenterY - (heroRect.top + scaledHeroHeight / 2);
+        return {
+          dx: dx,
+          dy: dy,
+          scale: parseFloat(scale.toFixed(4))
+        };
+      }
+
+      function applyTransform(t){
+        if (!t) return;
+        hero.style.transform = 'matrix(' + t.scale + ',0,0,' + t.scale + ',' + t.dx + ',' + t.dy + ')';
+      }
+
+      function resetTransform(){
+        hero.style.transform = '';
+      }
+
+      function startDock(){
+        if (isDocked || isTransitioning) return;
+        var nextTarget = computeTarget();
+        if (!nextTarget) return;
+        target = nextTarget;
+        isTransitioning = true;
+        body.classList.add('hero-transition');
+        hero.classList.add('is-floating');
+        resetTransform();
+        hero.getBoundingClientRect(); // force reflow so transition starts from identity
+        applyTransform(target);
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          body.classList.add('hero-docked');
+          hero.classList.remove('is-floating');
+          isTransitioning = false;
+          isDocked = true;
+        }, 820);
+      }
+
+      function resetDock(){
+        clearTimeout(timer);
+        isDocked = false;
+        isTransitioning = false;
+        body.classList.remove('hero-transition');
+        body.classList.remove('hero-docked');
+        hero.classList.remove('is-floating');
+        resetTransform();
+      }
+
+      var sectionRect = null;
+      var lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var scrollDir = 'down';
+      window.addEventListener('scroll', function(){
+        var current = window.pageYOffset || document.documentElement.scrollTop || 0;
+        scrollDir = current > lastScrollY ? 'down' : 'up';
+        lastScrollY = current;
+      }, { passive:true });
+
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.target !== section) return;
+          sectionRect = entry.boundingClientRect;
+          if (!entry.isIntersecting){
+            var rootBottom = entry.rootBounds ? entry.rootBounds.bottom : window.innerHeight;
+            if (entry.boundingClientRect.top >= rootBottom){
+              if (isDocked || isTransitioning) resetDock();
+            }
+            return;
+          }
+          if (scrollDir === 'down'){
+            startDock();
+          }
+        });
+      }, { threshold:[0,0.45,0.9] });
+
+      observer.observe(section);
+
+      window.addEventListener('resize', function(){
+        if (!body.classList.contains('hero-transition')) return;
+        var nextTarget = computeTarget();
+        if (!nextTarget) return;
+        target = nextTarget;
+        applyTransform(target);
+      });
     })();
   </script>
 </body>
