@@ -3,8 +3,18 @@
     "title": "Roadmap",
     "url": "https://github.com/users/YofiClemy/projects/1"
   },
-  "updatedAt": "2025-11-11T00:47:19.495Z",
+  "updatedAt": "2025-11-11T06:15:52.073Z",
   "items": [
+    {
+      "title": "Note snippets manager",
+      "url": "https://github.com/YofiClemy/Monedario/issues/17",
+      "repo": "YofiClemy/Monedario",
+      "labels": [
+        "Feature request"
+      ],
+      "status": "Done",
+      "type": "Issue"
+    },
     {
       "title": "Budget tracker per category",
       "url": "https://github.com/YofiClemy/Monedario/issues/1",
@@ -153,6 +163,36 @@
         "Feature request"
       ],
       "status": "Under review",
+      "type": "Issue"
+    },
+    {
+      "title": "Better HeatMap",
+      "url": "https://github.com/YofiClemy/Monedario/issues/16",
+      "repo": "YofiClemy/Monedario",
+      "labels": [
+        "Feature request"
+      ],
+      "status": "In progress",
+      "type": "Issue"
+    },
+    {
+      "title": "Multiple workspaces per user (ie: Personal vs work)",
+      "url": "https://github.com/YofiClemy/Monedario/issues/18",
+      "repo": "YofiClemy/Monedario",
+      "labels": [
+        "Feature request"
+      ],
+      "status": "Done",
+      "type": "Issue"
+    },
+    {
+      "title": "Shared workspaces through iCloud",
+      "url": "https://github.com/YofiClemy/Monedario/issues/19",
+      "repo": "YofiClemy/Monedario",
+      "labels": [
+        "Feature request"
+      ],
+      "status": "Done",
       "type": "Issue"
     }
   ]
