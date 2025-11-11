@@ -1,5 +1,5 @@
 ---
-title: Monedario — Money Calendar
+title: Monedario - Money Calendar
 ---
 
 <!doctype html>
@@ -208,10 +208,10 @@ title: Monedario — Money Calendar
   <!-- Nav -->
   <nav class="nav" aria-label="Main">
     <div class="wrap">
-      <div class="brand" aria-label="Monedario">
-        <img class="logo" src="assets/app-icon.png" data-light="assets/app-icon.png" data-dark="assets/app-icon-dark.png" alt="Monedario logo">
+      <a href="{{ '/' | relative_url }}" class="brand" aria-label="Monedario home">
+        <img class="logo" src="{{ '/assets/app-icon.png' | relative_url }}" data-light="{{ '/assets/app-icon.png' | relative_url }}" data-dark="{{ '/assets/app-icon-dark.png' | relative_url }}" alt="">
         <span>Monedario</span>
-      </div>
+      </a>
       <div class="nav-actions">
         <a href="#screenshots">Screenshots</a>
         <a href="#features">Features</a>
@@ -240,7 +240,7 @@ title: Monedario — Money Calendar
       </div>
       <div class="device hero-device" aria-hidden="true">
         <div class="screen">
-          <img class="hero-shot" src="assets/app-screenshot.png" data-light="assets/app-screenshot.png" data-dark="assets/app-screenshot-dark.png" alt="Monedario app screenshot" loading="lazy">
+          <img class="hero-shot" src="assets/app-screenshot.png" data-light="assets/app-screenshot.png" data-dark="assets/app-screenshot-dark.png" alt="Monedario app screenshot">
         </div>
       </div>
     </div>
@@ -262,8 +262,8 @@ title: Monedario — Money Calendar
           <div class="card card-5"><h3>Areas & Categories</h3><p>Group categories into larger Areas for cleaner charts.</p></div>
           <div class="card card-6"><h3>Cumulative chart</h3><p>See daily spending through the month at a glance.</p></div>
           <div class="card card-7"><h3>Local statistics</h3><p>On‑device analytics with export & delete.</p></div>
-          <div class="card card-8"><h3>CSV import/export</h3><p>Easy import with prefilled csv. Export all freely without constraint or payment.</p></div>
-          <div class="card card-9"><h3>Currency & regional</h3><p>Currency, symbol placement, separators, date format, week start.</p></div>
+          <div class="card card-8"><h3>CSV import/export</h3><p>Easy import with prefilled CSV. Export all freely without constraint or payment.</p></div>
+          <div class="card card-9"><h3>Currency & regional formats</h3><p>Currency, symbol placement, separators, date format, week start.</p></div>
           <div class="card card-10"><h3>Accessibility</h3><p>VoiceOver, Larger/Bold Text, Reduce Motion, Switch Control.</p></div>
           <div class="card card-11"><h3>Languages</h3><p>English · Español · Français and more to come</p></div>
         </div>
@@ -318,8 +318,10 @@ title: Monedario — Money Calendar
     <section id="roadmap">
       <div class="wrap">
         <h2 class="section-title">Public Roadmap</h2>
-        <p class="section-lede">Live snapshot of what being Worked on, Planned, Under Review, and Done.</p>
-        <div class="roadmap-grid" id="rm-grid"></div>
+      <p class="section-lede">
+        Live snapshot of what is being worked on, planned, under review, and recently shipped.
+      </p>        
+      <div class="roadmap-grid" id="rm-grid"></div>
         <p id="rm-fallback" class="section-lede" hidden>
           Seems like we couldn't load the embedded roadmap. View it on GitHub:
           <a href="https://github.com/users/YofiClemy/projects/1" target="_blank" rel="noopener">Public Project</a>
@@ -334,7 +336,7 @@ title: Monedario — Money Calendar
         <p class="section-lede">iPhone, iPad, and macOS.</p>
         <div class="cta-row">
           <a class="btn" style="background:var(--brand);color:#fff" href="https://testflight.apple.com/" target="_blank" rel="noopener">TestFlight - iOS/iPadOS</a>
-          <a class="btn" style="background:var(--brand);color:#fff" href="https://testflight.apple.com/" target="_blank" rel="noopener">TestFlight - macOS (coming soon)</a>
+          <button class="btn" type="button" disabled aria-disabled="true" style="border:1px solid var(--brand);color:var(--brand);opacity:0.55;cursor:not-allowed;background:transparent;">TestFlight - macOS (coming soon)</button>
           <a class="btn" style="background:var(--brand);color:#fff" href="https://discord.gg/7WR7eXchxB" target="_blank" rel="noopener">Discord beta testers</a>
           <a class="btn" style="border:1px solid var(--brand);color:var(--brand)" href="https://insigh.to/b/monedario" target="_blank" rel="noopener">Feature requests & votes</a>
           <a class="btn" style="border:1px solid var(--brand);color:var(--brand)" href="https://github.com/YofiClemy/Monedario/releases" target="_blank" rel="noopener">Changelog</a>
@@ -347,10 +349,11 @@ title: Monedario — Money Calendar
   <footer>
     <div class="footer-grid">
       <div>© <span id="y"></span> Monedario - Money Calendar</div>
-      <div>
-        <a href="https://github.com/YofiClemy/Monedario" target="_blank" rel="noopener">GitHub</a>
-        · <a href="#download">Join beta</a>
-      </div>
+<div>
+  <a href="https://github.com/YofiClemy/Monedario" target="_blank" rel="noopener">GitHub</a>
+  · <a href="#download">Join beta</a>
+  · <a href="{{ '/privacy' | relative_url }}">Privacy</a>
+</div>
     </div>
   </footer>
 
